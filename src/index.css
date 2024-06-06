@@ -1,5 +1,13 @@
 @import './styles/variables.css';
 
+* {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+}
+
 body {
   background: var(--background-color);
   font-family: sans-serif;
@@ -9,4 +17,10 @@ body {
   position: relative;
   display: flex;
   padding-top: 30px;
+  padding-left: 300px;
+}
+
+.project-section {
+  flex: 1;
+  padding: 40px 20px;
 }

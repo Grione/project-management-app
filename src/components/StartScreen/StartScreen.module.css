@@ -1,0 +1,32 @@
+.start_screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 70px;
+}
+
+.logo {
+  width: 60px;
+}
+
+.title {
+  margin-bottom: 0;
+}
+
+.text {
+  margin-bottom: 25px;
+}
+
+.button {
+  border: none;
+  padding: 10px;
+  margin: 0;
+  background: var(--secondary-color);
+  color: var(--background-color);
+  cursor: pointer;
+  border-radius: 5px;
+
+  &:hover {
+    background: var(--primary-color);
+  }
+}

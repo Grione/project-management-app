@@ -29,3 +29,17 @@
     background-color: var(--secondary-color);
   }
 }
+
+.projects {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0 0;
+
+}
+
+.projects li {
+  color: var(--background-color);
+}

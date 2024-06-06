@@ -1,0 +1,49 @@
+.add_project {
+  display: flex;
+  flex-direction: column;
+} 
+
+.buttons {
+  display: flex;
+  margin-bottom: 30px;
+  gap: 10px;
+  align-self: flex-end;
+}
+
+.button_secondary, .button_primary {
+  background-color: transparent;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.button_primary {
+  background: var(--secondary-color);
+  color: var(--background-color);
+  border-radius: 5px;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input_row {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: var(--primary-color);
+    font-weight: 600;
+  }
+}
+
+.input {
+  padding: 5px 10px;
+  background-color: lightgray;
+  border: none;
+}
