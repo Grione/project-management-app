@@ -5,52 +5,88 @@ import AddProject from "./components/AddProject/AddProject";
 import Project from "./components/Project/Project";
 
 function App() {
-  const [isNewProject, setIsNewProject] = useState(false);
-  const [projects, setProjects] = useState([]);
-  const [project, setProject] = useState(null);
+  const [projectState, setProjectState] = useState({
+    selectedProject: undefined,
+    projects: []
+  })
 
   function handlerCreateProject() {
-    setIsNewProject(true);
-    setProject(null);
+    setProjectState((prevState) => {
+      return {
+        ...prevState,
+        selectedProject: null
+      }
+    })
   }
 
   function handleCancelProject() {
-    setIsNewProject(false);
+    setProjectState((prevState) => {
+      return {
+        ...prevState,
+        selectedProject: undefined
+      }
+    })
   }
 
   function handleAddProject(newProject) {
-    setProjects((prevProjects) => {
-      return [
-        ...prevProjects,
-        newProject
-      ]
+    setProjectState((prevState) => {
+      return {
+        selectedProject: newProject.id,
+        projects: [...prevState.projects, newProject]
+      }
     });
-    handleCancelProject();
   }
 
   function handleOpenProject(project) {
-    setProject(project);
-    setIsNewProject(false);
+    setProjectState((prevState) => {
+      return {
+        ...prevState,
+        selectedProject: project.id,
+      }
+    });
+  }
+
+  function handleUpdateProjects(tasks) {
+    setProjectState((prevState)=> {
+      return {
+        ...prevState, 
+        projects: projectState.projects.map((pr)=> {
+          if(pr.id === projectState.selectedProject) {
+            pr.tasks = tasks
+          }
+
+          return pr; 
+        })
+      }
+    })
+
+  }
+
+  const selectedProject = projectState.projects.find((project) => project.id === projectState.selectedProject);
+
+  let content = <Project project={selectedProject} updateProject={handleUpdateProjects} />
+
+  if (projectState.selectedProject === null) {
+    content = <AddProject
+      onSubmit={handleAddProject}
+      onCancel={handleCancelProject}
+    />
+  } else if (projectState.selectedProject === undefined) {
+    content = <StartScreen
+      createProject={handlerCreateProject} />
   }
 
   return (
     <>
       <main className="main">
-        <Sidebar 
-          onClick={handlerCreateProject} 
-          openProject={handleOpenProject} 
-          projects={projects} 
-          activeProject={project}
-          />
+        <Sidebar
+          createProject={handlerCreateProject}
+          openProject={handleOpenProject}
+          projects={projectState.projects}
+          activeProject={projectState.selectedProject}
+        />
         <section className="project-section">
-          {isNewProject && <AddProject
-              onSubmit={handleAddProject}
-              onCancel={handleCancelProject}
-              projects={projects} /> }
-          {(!isNewProject && !project) && <StartScreen
-              onClick={handlerCreateProject} />}
-
-          {project && <Project project={project} />}
+          {content}
         </section>
 
       </main>

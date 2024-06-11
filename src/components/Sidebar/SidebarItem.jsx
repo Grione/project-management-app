@@ -1,11 +1,11 @@
 import classes from './Sidebar.module.css';
 
-export default function SidebarItem({ project, active, onClick }) {
+export default function SidebarItem({ project, active, openProject }) {
 
-  const activeClass = active === project;
+  const activeClass = active === project.id;
 
   function clickHandler(project) {
-    onClick(project);
+    openProject(project);
   }
 
   return (

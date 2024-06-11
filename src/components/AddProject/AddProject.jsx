@@ -1,5 +1,6 @@
 import classes from './AddProject.module.css';
 import { useRef, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 function validateRequaredInput(value) {
   if (!value) return false;
@@ -9,7 +10,7 @@ function validateRequaredInput(value) {
   return value;
 }
 
-export default function AddProject({ onSubmit, projects, onCancel }) {
+export default function AddProject({ onSubmit, onCancel }) {
   const titleRef = useRef(null);
   const descRef = useRef(null);
   const dateRef = useRef(null);
@@ -25,6 +26,7 @@ export default function AddProject({ onSubmit, projects, onCancel }) {
     };
 
     const newProject = {
+      id: uuidv4(),
       title: titleRef.current.value,
       description: descRef.current.value,
       date: dateRef.current.value

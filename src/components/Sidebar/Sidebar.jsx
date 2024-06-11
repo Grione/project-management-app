@@ -1,19 +1,19 @@
 import classes from './Sidebar.module.css';
 import SidebarItem from './SidebarItem';
 
-export default function Sidebar({ onClick, projects, openProject, activeProject }) {
+export default function Sidebar({ createProject, projects, openProject, activeProject }) {
 
   return (
     <aside className={classes.aside}>
       <h1 className={classes.title}>Your Projects</h1>
-      <button onClick={onClick} className={classes.button}>+ Add Project</button>
+      <button onClick={createProject} className={classes.button}>+ Add Project</button>
       <ul className={classes.projects}>
-        {projects?.map((project, index) => {
+        {projects?.map((project) => {
           return (
             <SidebarItem 
-            key={index}
+            key={project.id}
             project={project} 
-            onClick={openProject}
+            openProject={openProject}
             active={activeProject}
             />
           )
