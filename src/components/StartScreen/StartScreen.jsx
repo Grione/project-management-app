@@ -1,7 +1,7 @@
 import classes from './StartScreen.module.css';
 import logo from '../../assets/no-projects.png';
 
-export default function StartScreen() {
+export default function StartScreen({onClick}) {
   return (
     <div className={classes.start_screen}>
       <img src={logo} alt="" className={classes.logo}/>
@@ -9,7 +9,7 @@ export default function StartScreen() {
       <p className={classes.text}>
         Select a project or get started with a new one
       </p>
-      <button className={classes.button}>Create new project</button>
+      <button className={classes.button} onClick={onClick}>Create new project</button>
     </div>
   )
 }
