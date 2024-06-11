@@ -38,11 +38,11 @@ function App() {
   }
 
   function handleDeleteProject() {
-    setProjectState((prevState)=> {
+    setProjectState((prevState) => {
       return {
-        ...prevState, 
-        selectedProject: undefined, 
-        projects: prevState.projects.filter((proj)=> proj.id !== prevState.selectedProject)
+        ...prevState,
+        selectedProject: undefined,
+        projects: prevState.projects.filter((proj) => proj.id !== prevState.selectedProject)
       }
     })
   }
@@ -56,16 +56,15 @@ function App() {
     });
   }
 
-  function handleUpdateProjects(tasks) {
-    setProjectState((prevState)=> {
+  function handleUpdateProjects(newTasks) {
+    setProjectState((prevState) => {
       return {
-        ...prevState, 
-        projects: projectState.projects.map((pr)=> {
-          if(pr.id === projectState.selectedProject) {
-            pr.tasks = tasks
+        ...prevState,
+        projects: projectState.projects.map((pr) => {
+          if (pr.id === projectState.selectedProject) {
+            return {...pr, tasks: newTasks};
           }
-
-          return pr; 
+         return pr; 
         })
       }
     })
@@ -74,7 +73,10 @@ function App() {
 
   const selectedProject = projectState.projects.find((project) => project.id === projectState.selectedProject);
 
-  let content = <Project project={selectedProject} deleteProject={handleDeleteProject} updateProject={handleUpdateProjects} />
+  let content = <Project
+    project={selectedProject}
+    deleteProject={handleDeleteProject}
+    updateProject={handleUpdateProjects} />
 
   if (projectState.selectedProject === null) {
     content = <AddProject

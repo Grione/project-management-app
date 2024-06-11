@@ -29,7 +29,8 @@ export default function AddProject({ onSubmit, onCancel }) {
       id: uuidv4(),
       title: titleRef.current.value,
       description: descRef.current.value,
-      date: dateRef.current.value
+      date: dateRef.current.value,
+      tasks: [],
     }
 
     onSubmit(newProject);

@@ -1,28 +1,27 @@
 import classes from './Project.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Project({ project, updateProject, deleteProject }) {
 
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState([...project.tasks]);
   const [taskInput, setTaskInput] = useState('');
 
+  useEffect(() => {
+    setTasks([...project.tasks]);
+  }, [project.tasks])
 
   function addTask() {
 
-    setTasks((prevTasks) => {
-      const newTasks = [...prevTasks, taskInput];
-
-      updateProject(tasks);
-
-      return newTasks;
-    });
+    const newTasks = [...tasks, taskInput];
+    setTasks(newTasks);
+    updateProject(newTasks);
 
     setTaskInput('');
   }
 
   return (
     <section>
-      <button onClick={()=> deleteProject()}>Delete</button>
+      <button onClick={() => deleteProject()}>Delete</button>
       <h1>{project.title}</h1>
       <span>{project.date}</span>
       <p>{project.description}</p>
@@ -34,7 +33,7 @@ export default function Project({ project, updateProject, deleteProject }) {
           type="text"
           value={taskInput}
           onChange={(e) => setTaskInput(e.target.value)} />
-        <button onClick={() => addTask()}>Add Task</button>
+        <button onClick={addTask}>Add Task</button>
       </div>
 
       {project.tasks?.map((task, index) => {
