@@ -1,7 +1,7 @@
 import classes from './Project.module.css';
 import { useState } from 'react';
 
-export default function Project({ project, updateProject }) {
+export default function Project({ project, updateProject, deleteProject }) {
 
   const [tasks, setTasks] = useState([]);
   const [taskInput, setTaskInput] = useState('');
@@ -22,6 +22,7 @@ export default function Project({ project, updateProject }) {
 
   return (
     <section>
+      <button onClick={()=> deleteProject()}>Delete</button>
       <h1>{project.title}</h1>
       <span>{project.date}</span>
       <p>{project.description}</p>
